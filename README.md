@@ -1,6 +1,6 @@
-# Internal Deadline Web Application
+# Countdown
 
-A React web application that keeps track of internal deadlines using a countdown clock.
+A countdown timer React web application.
 
 ### Installation
 
