@@ -162,13 +162,24 @@ class Countdown extends React.Component<{}, Props> {
   }
 
   handleStartButtonOnClick(event: MouseEvent<HTMLButtonElement>) {
-    this.setState({
-      time: {
-        hours: Number(this.hoursInput?.value) || 0,
-        minutes: Number(this.minutesInput?.value) || 0,
-        seconds: Number(this.secondsInput?.value) || 0,
-      }
-    })
+    const selectedTime = new Date()
+    const { hours, minutes, seconds } = this.state.time
+    selectedTime.setHours(selectedTime.getHours() + hours)
+    selectedTime.setMinutes(selectedTime.getMinutes() + minutes)
+    selectedTime.setSeconds(selectedTime.getSeconds() + seconds)
+
+    setInterval(() => {
+      const now = new Date()
+      const timeDifference = selectedTime.getTime() - now.getTime()
+
+      this.setState({
+        time: {
+          hours: Math.floor((timeDifference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((timeDifference / 1000 / 60) % 60),
+          seconds: Math.floor((timeDifference / 1000) % 60),
+        }
+      })
+    }, 1000)
   }
 
   setHoursInputRef(element: HTMLInputElement | null) {
