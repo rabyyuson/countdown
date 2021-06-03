@@ -30,8 +30,8 @@ const Controls = ({
           <h3>Hours</h3>
           <input
             type="number"
-            placeholder="00"
-            min="00"
+            placeholder="0"
+            min="0"
             max="24"
             ref={setHoursInputRef}
             onChange={handleHoursInputOnChange}
@@ -41,8 +41,8 @@ const Controls = ({
           <h3>Minutes</h3>
           <input
             type="number"
-            placeholder="00"
-            min="00"
+            placeholder="0"
+            min="0"
             max="60"
             ref={setMinutesInputRef}
             onChange={handleMinutesInputOnChange}
@@ -52,8 +52,8 @@ const Controls = ({
           <h3>Seconds</h3>
           <input
             type="number"
-            placeholder="00"
-            min="00"
+            placeholder="0"
+            min="0"
             max="60"
             ref={setSecondsInputRef}
             onChange={handleSecondsInputOnChange}

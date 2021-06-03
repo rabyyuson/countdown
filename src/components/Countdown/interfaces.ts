@@ -38,4 +38,5 @@ export interface Props {
     minutes: number;
     seconds: number;
   };
+  intervalId: number;
 }

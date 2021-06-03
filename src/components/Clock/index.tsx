@@ -7,10 +7,19 @@ const Clock: FunctionComponent<Props> = ({ time }) => {
     minutes,
     seconds,
   } = time
+  
   return (
     <>
       <div>
-        {`${hours}:${minutes}:${seconds}`}
+        <div>
+          {`${Number(hours) < 10 ? `0${hours}` : hours}`}:
+        </div>
+        <div>
+          {`${Number(minutes) < 10 ? `0${minutes}` : minutes}`}:
+        </div>
+        <div>
+          {`${Number(seconds) < 10 ? `0${seconds}` : seconds}`}:
+        </div>
       </div>
     </>
   )

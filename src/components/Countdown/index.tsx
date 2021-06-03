@@ -69,7 +69,8 @@ class Countdown extends React.Component<{}, Props> {
         hours: 0,
         minutes: 0,
         seconds: 0,
-      }
+      },
+      intervalId: 0,
     }
   }
 
@@ -106,12 +107,25 @@ class Countdown extends React.Component<{}, Props> {
 
   handleHoursInputOnChange(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    const { hours, ...rest } = this.state.time
-    const hoursToAssign = (Number(value) > 24) ? 24 : value
+    const { minutes, seconds } = this.state.time
+    const isMoreThanADay = Number(value) > 24
+    const minutesToAssign = isMoreThanADay ? 0 : minutes
+    const secondsToAssign = isMoreThanADay ? 0 : seconds
+    let hoursToAssign
+    if (isMoreThanADay) {
+      hoursToAssign = 24
+    } else {
+      hoursToAssign = value
+    }
+
+    if ((Number(value) > 23) && (Number(minutes) > 0 || Number(seconds) > 0)) {
+      hoursToAssign = 23
+    }
     
     this.setState({ time: {
       hours: Number(hoursToAssign),
-      ...rest
+      minutes: Number(minutesToAssign),
+      seconds: Number(secondsToAssign),
     }})
 
     if (this.hoursInput) {
@@ -121,36 +135,72 @@ class Countdown extends React.Component<{}, Props> {
 
   handleMinutesInputOnChange(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    const { minutes, ...rest } = this.state.time
-    const minutesToAssign = (Number(value) > 60) ? 60 : value
+    const { hours, seconds } = this.state.time
+    const isMoreThanAnHour = Number(value) > 60
+    const minutesToAssign = isMoreThanAnHour ? 60 : value
+    const isADay = hours === 24
+    const hoursToAssign = (isADay && Number(value) > 0) ? 23 : hours
 
     this.setState({ time: {
+      hours: hoursToAssign,
       minutes: Number(minutesToAssign),
-      ...rest
+      seconds,
     }})
 
     if (this.minutesInput) {
       this.minutesInput.value = String(minutesToAssign)
     }
+
+    if (this.hoursInput) {
+      this.hoursInput.value = String(hoursToAssign)
+    }
   }
 
   handleSecondsInputOnChange(event: ChangeEvent<HTMLInputElement>) {
     const { value } = event.target
-    const { seconds, ...rest } = this.state.time
+    const { hours, minutes } = this.state.time
     const secondsToAssign = (Number(value) > 60) ? 60 : value
+    const isADay = hours === 24
+    const hoursToAssign = (isADay && Number(value) > 0) ? 23 : hours
 
     this.setState({ time: {
+      hours: hoursToAssign,
+      minutes,
       seconds: Number(secondsToAssign),
-      ...rest
     }})
 
     if (this.secondsInput) {
       this.secondsInput.value = String(secondsToAssign)
     }
+
+    if (this.hoursInput) {
+      this.hoursInput.value = String(hoursToAssign)
+    }
   }
 
   handleCancelButtonOnClick(event: MouseEvent<HTMLButtonElement>) {
-    console.log(event)
+    const { intervalId } = this.state
+    window.clearInterval(intervalId)
+
+    this.setState({
+      time: {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      }
+    })
+
+    if (this.hoursInput) {
+      this.hoursInput.value = ""
+    }
+
+    if (this.minutesInput) {
+      this.minutesInput.value = ""
+    }
+
+    if (this.secondsInput) {
+      this.secondsInput.value = ""
+    }
   }
 
   handlePauseButtonOnClick(event: MouseEvent<HTMLButtonElement>) {
@@ -168,7 +218,7 @@ class Countdown extends React.Component<{}, Props> {
     selectedTime.setMinutes(selectedTime.getMinutes() + minutes)
     selectedTime.setSeconds(selectedTime.getSeconds() + seconds)
 
-    setInterval(() => {
+    const intervalId = window.setInterval(() => {
       const now = new Date()
       const timeDifference = selectedTime.getTime() - now.getTime()
 
@@ -180,6 +230,8 @@ class Countdown extends React.Component<{}, Props> {
         }
       })
     }, 1000)
+
+    this.setState({ intervalId })
   }
 
   setHoursInputRef(element: HTMLInputElement | null) {
