@@ -1,12 +1,12 @@
-import InternalDeadline from './components/Timer/index'
+import Countdown from './components/Countdown'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <InternalDeadline />
+      <Countdown />
     </div>
   );
 }
 
-export default App;
+export default App

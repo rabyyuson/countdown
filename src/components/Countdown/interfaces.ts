@@ -1,6 +1,6 @@
-export interface StateProps {
+export interface Props {
   theme: {
-    "forms": {
+    forms: {
       "font_size": number | null;
       "font_color": string | null;
       "font_family": string | null;
@@ -10,7 +10,7 @@ export interface StateProps {
       "background_color": string | null;
       "placeholder_color": string | null;
     },
-    "global": {
+    global: {
       "body_color": string | null;
       "error_color": string | null;
       "border_radius": number | null;
@@ -20,17 +20,22 @@ export interface StateProps {
       "primary_border_color": string | null;
       "secondary_body_color": string | null;
     },
-    "primaryFontFamily": {
+    primaryFontFamily: {
       "bold": string | null;
       "light": string | null;
       "medium": string | null;
       "regular": string | null;
     };
-    "text": {
+    text: {
       "primary_text_size": number | null;
       "primary_text_color": string | null;
       "secondary_text_size": number | null;
       "secondary_text_color": string | null;
     };
-  }
+  };
+  time: {
+    hours: number;
+    minutes: number;
+    seconds: number;
+  };
 }
