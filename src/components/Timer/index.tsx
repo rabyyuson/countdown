@@ -4,9 +4,10 @@ import fetch from 'cross-fetch'
 import get from 'lodash/get'
 import { StateProps } from '../../interfaces'
 import Countdown from '../Countdown'
+import Controls from '../Controls'
 import config from '../../config.json'
 
-class InternalDeadline extends React.Component<{}, StateProps> {
+class Timer extends React.Component<{}, StateProps> {
   constructor(props: {}) {
     super(props)
 
@@ -85,9 +86,10 @@ class InternalDeadline extends React.Component<{}, StateProps> {
     return (
       <ThemeProvider theme={theme}>
         <Countdown />
+        <Controls />
       </ThemeProvider>
     )
   }
 }
 
-export default InternalDeadline
+export default Timer
