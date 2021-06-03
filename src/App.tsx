@@ -1,4 +1,4 @@
-import InternalDeadline from './components/InternalDeadline'
+import InternalDeadline from './components/InternalDeadline/index'
 import './App.css';
 
 function App() {
