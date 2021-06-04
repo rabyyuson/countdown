@@ -64,14 +64,15 @@ const Input = styled.input`
   text-align: center;
   border: none;
   border-bottom: 2px solid #111;
+  border-radius: 0;
   display: block;
   font-family: Arial;
   margin-top: -1px;
   margin-bottom: 5px;
 
   @media (max-width: 560px) {
-    width: 100%;
-    margin: 0;
+    width: 120px;
+    margin: 0 auto;
   }
 `
 
