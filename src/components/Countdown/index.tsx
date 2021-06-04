@@ -243,6 +243,12 @@ class Countdown extends React.Component<{}, Props> {
   render() {
     const { intervalId, theme, time } = this.state
 
+    const LogoContainer = styled.div`
+      width: 400px;
+      margin: 0 auto;
+      border: 1px dashed red;
+    `
+
     const Logo = styled.img.attrs((props) => ({
       src: props.theme.header && props.theme.header.logo
     }))`
@@ -253,19 +259,23 @@ class Countdown extends React.Component<{}, Props> {
 
     return (
       <ThemeProvider theme={theme}>
+        <LogoContainer>
           <Logo />
-          <Clock time={time} />
-          <Controls
-            intervalId={intervalId}
-            handleHoursInputOnChange={this.handleHoursInputOnChange}
-            handleMinutesInputOnChange={this.handleMinutesInputOnChange}
-            handleSecondsInputOnChange={this.handleSecondsInputOnChange}
-            handleStartButtonOnClick={this.handleStartButtonOnClick}
-            handleStopButtonOnClick={this.handleStopButtonOnClick}
-            setHoursInputRef={this.setHoursInputRef}
-            setMinutesInputRef={this.setMinutesInputRef}
-            setSecondsInputRef={this.setSecondsInputRef}
-          />
+        </LogoContainer>
+
+        <Clock time={time} />
+
+        <Controls
+          intervalId={intervalId}
+          handleHoursInputOnChange={this.handleHoursInputOnChange}
+          handleMinutesInputOnChange={this.handleMinutesInputOnChange}
+          handleSecondsInputOnChange={this.handleSecondsInputOnChange}
+          handleStartButtonOnClick={this.handleStartButtonOnClick}
+          handleStopButtonOnClick={this.handleStopButtonOnClick}
+          setHoursInputRef={this.setHoursInputRef}
+          setMinutesInputRef={this.setMinutesInputRef}
+          setSecondsInputRef={this.setSecondsInputRef}
+        />
       </ThemeProvider>
     )
   }
