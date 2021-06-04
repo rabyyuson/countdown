@@ -5,13 +5,22 @@ import get from 'lodash/get'
 import { Props } from './interface'
 import Clock from '../Clock'
 import Controls from '../Controls'
+import Footer from '../Footer'
 import config from '../../config.json'
 import styled from 'styled-components'
 
+const LogoWrapper = styled.div`
+  margin: 40px 0 0 0;
+`
+
 const LogoContainer = styled.div`
-  width: 400px;
+  padding: 20px;
+  width: 460px;
   margin: 0 auto;
-  border: 1px dashed red;
+  border-radius: ${(props) => props.theme.global.border_radius * 2 || 0}px ${(props) => props.theme.global.border_radius * 2 || 0}px 0 0;
+  background-color: ${(props) => props.theme.global.body_color || "#fff"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  border-bottom: none;
 `
 
 const Logo = styled.img.attrs((props) => ({
@@ -46,16 +55,6 @@ class Countdown extends React.Component<{}, Props> {
 
     this.state = {
       theme: {
-        forms: {
-          "font_size": null,
-          "font_color": null,
-          "font_family": null,
-          "border_color": null,
-          "field_height": 0,
-          "border_radius": null,
-          "background_color": null,
-          "placeholder_color": null,
-        },
         global: {
           "body_color": null,
           "error_color": null,
@@ -80,12 +79,6 @@ class Countdown extends React.Component<{}, Props> {
           "desktop_logo_width": 0,
           "active_border_color": null,
           "active_background_color": null,
-        },
-        text: {
-          "primary_text_size": 0,
-          "primary_text_color": null,
-          "secondary_text_size": 0,
-          "secondary_text_color": null,
         }
       },
       time: {
@@ -111,17 +104,13 @@ class Countdown extends React.Component<{}, Props> {
       })
       .then((visualConfigurations) => {
         const data = get(visualConfigurations, 'data.data')
-        const forms = get(data, 'forms') || {}
         const global = get(data, 'global') || {}
         const header = get(data, 'header') || {}
-        const text = get(data, 'text') || {}
 
         this.setState({
           theme: {
-            forms,
             global,
             header,
-            text,
           }
         })
       })
@@ -259,11 +248,16 @@ class Countdown extends React.Component<{}, Props> {
 
     return (
       <ThemeProvider theme={theme}>
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
+        <LogoWrapper>
+          <LogoContainer>
+            <Logo />
+          </LogoContainer>
+        </LogoWrapper>
 
-        <Clock time={time} />
+        <Clock
+          intervalId={intervalId}
+          time={time}
+        />
 
         <Controls
           intervalId={intervalId}
@@ -276,6 +270,8 @@ class Countdown extends React.Component<{}, Props> {
           setMinutesInputRef={this.setMinutesInputRef}
           setSecondsInputRef={this.setSecondsInputRef}
         />
+
+        <Footer />
       </ThemeProvider>
     )
   }

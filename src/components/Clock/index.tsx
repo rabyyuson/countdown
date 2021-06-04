@@ -2,29 +2,65 @@ import { FunctionComponent } from 'react'
 import { Props } from './interface'
 import styled from 'styled-components'
 
-const Container = styled.div`
-  width: 400px;
-  border: 1px dashed red;
+const ClockContainer = styled.div`
+  width: 500px;
+  background-color: ${(props) => props.theme.global.body_color || "#fff"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  border-bottom: none;
+  border-top: none;
   display: flex;
   flex-direction: row;
   margin: 0 auto;
 `
 
-const Clock: FunctionComponent<Props> = ({ time }) => {
+const TimeBlock = styled.div`
+  width: 100%;
+  text-align: center;
+`
+
+const Time = styled.div`
+  font-size: 60px;
+  font-weight: bold;
+  font-family: Arial;
+  margin-bottom: 8px;
+`
+
+const TimeLabel = styled.label`
+  font-size: 14px;
+  color: #4c4c4c;
+`
+
+const Clock: FunctionComponent<Props> = ({
+  intervalId,
+  time
+}) => {
   const { hours, minutes, seconds } = time
 
   return (
-    <Container>
-      <div>
-        {`${Number(hours) < 10 ? `0${hours}` : hours}`}:
-      </div>
-      <div>
-        {`${Number(minutes) < 10 ? `0${minutes}` : minutes}`}:
-      </div>
-      <div>
-        {`${Number(seconds) < 10 ? `0${seconds}` : seconds}`}
-      </div>
-    </Container>
+    <ClockContainer>
+      {!!intervalId && (
+        <>
+          <TimeBlock>
+            <Time>
+              {`${Number(hours) < 10 ? `0${hours}` : hours}`}
+            </Time>
+            <TimeLabel>Hours</TimeLabel>
+          </TimeBlock>
+          <TimeBlock>
+            <Time>
+              {`${Number(minutes) < 10 ? `0${minutes}` : minutes}`}
+            </Time>
+            <TimeLabel>Minutes</TimeLabel>
+          </TimeBlock>
+          <TimeBlock>
+            <Time>
+              {`${Number(seconds) < 10 ? `0${seconds}` : seconds}`}
+            </Time>
+            <TimeLabel>Seconds</TimeLabel>
+          </TimeBlock>
+        </>
+      )}
+    </ClockContainer>
   )
 }
 

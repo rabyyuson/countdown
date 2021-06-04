@@ -1,5 +1,59 @@
 import { FunctionComponent } from 'react'
 import { Props } from './interface'
+import styled from 'styled-components'
+
+const ControlsContainer = styled.div`
+  width: 500px;
+  border-radius: 0 0 ${(props) => props.theme.global.border_radius * 2 || 0}px ${(props) => props.theme.global.border_radius * 2 || 0}px;
+  background-color: ${(props) => props.theme.global.body_color || "#fff"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  border-top: none;
+  margin: 0 auto;
+`
+
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const InputBlock = styled.div`
+  margin: 0 auto;
+  text-align: center;
+`
+
+const Input = styled.input`
+  font-size: 60px;
+  font-weight: bold;
+  color: #000;
+  background: none;
+  outline: none;
+  text-align: center;
+  border: none;
+  border-bottom: 2px solid #111;
+  display: block;
+  font-family: Arial;
+  margin-left: 15px;
+  margin-top: -1px;
+  margin-bottom: 5px;
+`
+
+const InputLabel = styled.label`
+  font-size: 14px;
+  color: #4c4c4c;
+`
+
+const ButtonContainer = styled.div`
+  padding: 40px 20px 0 20px;
+  margin-bottom: 20px;
+`
+
+const ControlButton = styled.button`
+  width: 100%;
+  padding: 20px;
+  font-size: 26px;
+  text-transform: uppercase;
+  cursor: pointer;
+`
 
 const Controls: FunctionComponent<Props> = ({
   intervalId,
@@ -12,51 +66,57 @@ const Controls: FunctionComponent<Props> = ({
   setMinutesInputRef,
   setSecondsInputRef
 }) => (
-  <>
-    <div>
-      <div>
-        <h3>Hours</h3>
-        <input
-          type="number"
-          placeholder="0"
-          min="0"
-          max="23"
-          ref={setHoursInputRef}
-          onChange={handleHoursInputOnChange}
-        />
-      </div>
-      <div>
-        <h3>Minutes</h3>
-        <input
-          type="number"
-          placeholder="0"
-          min="0"
-          max="59"
-          ref={setMinutesInputRef}
-          onChange={handleMinutesInputOnChange}
-        />
-      </div>
-      <div>
-        <h3>Seconds</h3>
-        <input
-          type="number"
-          placeholder="0"
-          min="0"
-          max="59"
-          ref={setSecondsInputRef}
-          onChange={handleSecondsInputOnChange}
-        />
-      </div>
-    </div>
-    <div>
+  <ControlsContainer>
+    {!intervalId && (
+      <InputContainer>
+        <InputBlock>
+          <Input
+            type="number"
+            placeholder="00"
+            min="00"
+            max="23"
+            ref={setHoursInputRef}
+            onChange={handleHoursInputOnChange}
+          />
+          <InputLabel>Hours</InputLabel>
+        </InputBlock>
+        <InputBlock>
+          <Input
+            type="number"
+            placeholder="00"
+            min="00"
+            max="59"
+            ref={setMinutesInputRef}
+            onChange={handleMinutesInputOnChange}
+          />
+          <InputLabel>Minutes</InputLabel>
+        </InputBlock>
+        <InputBlock>
+          <Input
+            type="number"
+            placeholder="00"
+            min="00"
+            max="59"
+            ref={setSecondsInputRef}
+            onChange={handleSecondsInputOnChange}
+          />
+          <InputLabel>Seconds</InputLabel>
+        </InputBlock>
+      </InputContainer>
+    )}
+    <ButtonContainer>
       {!intervalId && (
-        <button onClick={handleStartButtonOnClick}>Start</button>
+        <ControlButton onClick={handleStartButtonOnClick}>
+          Start
+        </ControlButton>
       )}
       {!!intervalId && (
-        <button onClick={handleStopButtonOnClick}>Stop</button>
+        <ControlButton onClick={handleStopButtonOnClick}>
+          Stop
+        </ControlButton>
       )}
-    </div>
-  </>
+    </ButtonContainer>
+  </ControlsContainer>
 )
 
 export default Controls
