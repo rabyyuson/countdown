@@ -1,6 +1,7 @@
 import { ChangeEvent, MouseEvent } from 'react'
 
 const Controls = ({
+  intervalId,
   handleHoursInputOnChange,
   handleMinutesInputOnChange,
   handleSecondsInputOnChange,
@@ -10,6 +11,7 @@ const Controls = ({
   setMinutesInputRef,
   setSecondsInputRef,
 }: {
+  intervalId: number;
   handleHoursInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleMinutesInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleSecondsInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -18,50 +20,52 @@ const Controls = ({
   setHoursInputRef: (element: HTMLInputElement | null) => void;
   setMinutesInputRef: (element: HTMLInputElement | null) => void;
   setSecondsInputRef: (element: HTMLInputElement | null) => void;
-}) => {
-  return (
-    <>
+}) => (
+  <>
+    <div>
       <div>
-        <div>
-          <h3>Hours</h3>
-          <input
-            type="number"
-            placeholder="0"
-            min="0"
-            max="23"
-            ref={setHoursInputRef}
-            onChange={handleHoursInputOnChange}
-          />
-        </div>
-        <div>
-          <h3>Minutes</h3>
-          <input
-            type="number"
-            placeholder="0"
-            min="0"
-            max="59"
-            ref={setMinutesInputRef}
-            onChange={handleMinutesInputOnChange}
-          />
-        </div>
-        <div>
-          <h3>Seconds</h3>
-          <input
-            type="number"
-            placeholder="0"
-            min="0"
-            max="59"
-            ref={setSecondsInputRef}
-            onChange={handleSecondsInputOnChange}
-          />
-        </div>
+        <h3>Hours</h3>
+        <input
+          type="number"
+          placeholder="0"
+          min="0"
+          max="23"
+          ref={setHoursInputRef}
+          onChange={handleHoursInputOnChange}
+        />
       </div>
       <div>
+        <h3>Minutes</h3>
+        <input
+          type="number"
+          placeholder="0"
+          min="0"
+          max="59"
+          ref={setMinutesInputRef}
+          onChange={handleMinutesInputOnChange}
+        />
+      </div>
+      <div>
+        <h3>Seconds</h3>
+        <input
+          type="number"
+          placeholder="0"
+          min="0"
+          max="59"
+          ref={setSecondsInputRef}
+          onChange={handleSecondsInputOnChange}
+        />
+      </div>
+    </div>
+    <div>
+      {!intervalId && (
         <button onClick={handleStartButtonOnClick}>Start</button>
+      )}
+      {!!intervalId && (
         <button onClick={handleStopButtonOnClick}>Stop</button>
-      </div>
-    </>
-  )
-}
+      )}
+    </div>
+  </>
+)
 
 export default Controls

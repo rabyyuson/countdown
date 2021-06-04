@@ -29,6 +29,7 @@ class Countdown extends React.Component<{}, Props> {
     this.handleSecondsInputOnChange = this.handleSecondsInputOnChange.bind(this)
     this.handleStartButtonOnClick = this.handleStartButtonOnClick.bind(this)
     this.handleStopButtonOnClick = this.handleStopButtonOnClick.bind(this)
+    this.resetCountdown = this.resetCountdown.bind(this)
 
     this.state = {
       theme: {
@@ -112,6 +113,10 @@ class Countdown extends React.Component<{}, Props> {
       hours: Number(hoursToAssign),
       ...rest,
     }})
+
+    if (this.hoursInput) {
+      this.hoursInput.value = String(hoursToAssign)
+    }
   }
 
   handleMinutesInputOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -123,6 +128,10 @@ class Countdown extends React.Component<{}, Props> {
       minutes: Number(minutesToAssign),
       ...rest
     }})
+
+    if (this.minutesInput) {
+      this.minutesInput.value = String(minutesToAssign)
+    }
   }
 
   handleSecondsInputOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -134,11 +143,19 @@ class Countdown extends React.Component<{}, Props> {
       seconds: Number(secondsToAssign),
       ...rest,
     }})
+
+    if (this.secondsInput) {
+      this.secondsInput.value = String(secondsToAssign)
+    }
   }
 
   handleStartButtonOnClick(event: MouseEvent<HTMLButtonElement>) {
-    const selectedTime = new Date()
     const { hours, minutes, seconds } = this.state.time
+    if (!hours && !minutes && !seconds) {
+      return
+    }
+
+    const selectedTime = new Date()
     selectedTime.setHours(selectedTime.getHours() + hours)
     selectedTime.setMinutes(selectedTime.getMinutes() + minutes)
     selectedTime.setSeconds(selectedTime.getSeconds() + seconds)
@@ -146,13 +163,13 @@ class Countdown extends React.Component<{}, Props> {
     const intervalId = window.setInterval(() => {
       const now = new Date()
       const timeDifference = selectedTime.getTime() - now.getTime()
+      if (timeDifference < 1000) {
+        this.resetCountdown()
+      }
+
       const calculatedHours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24)
       const calculatedMinutes = Math.floor((timeDifference / 1000 / 60) % 60)
       const calculatedSeconds = Math.floor((timeDifference / 1000) % 60)
-
-      if (timeDifference < 1000) {
-        window.clearInterval(this.state.intervalId)
-      }
 
       this.setState({
         time: {
@@ -167,16 +184,11 @@ class Countdown extends React.Component<{}, Props> {
   }
 
   handleStopButtonOnClick(event: MouseEvent<HTMLButtonElement>) {
-    const { intervalId } = this.state
-    window.clearInterval(intervalId)
+    if (!this.state.intervalId) {
+      return
+    }
 
-    this.setState({
-      time: {
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-      }
-    })
+    this.resetCountdown()
   }
 
   setHoursInputRef(element: HTMLInputElement | null) {
@@ -191,13 +203,38 @@ class Countdown extends React.Component<{}, Props> {
     this.secondsInput = element
   }
 
+  resetCountdown() {
+    window.clearInterval(this.state.intervalId)
+    this.setState({
+      time: {
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      },
+      intervalId: 0,
+    })
+
+    if (this.hoursInput) {
+      this.hoursInput.value = ""
+    }
+
+    if (this.minutesInput) {
+      this.minutesInput.value = ""
+    }
+
+    if (this.secondsInput) {
+      this.secondsInput.value = ""
+    }
+  }
+
   render() {
-    const { theme, time } = this.state
+    const { intervalId, theme, time } = this.state
     
     return (
       <ThemeProvider theme={theme}>
         <Clock time={time} />
         <Controls
+          intervalId={intervalId}
           handleHoursInputOnChange={this.handleHoursInputOnChange}
           handleMinutesInputOnChange={this.handleMinutesInputOnChange}
           handleSecondsInputOnChange={this.handleSecondsInputOnChange}
