@@ -11,11 +11,21 @@ const ClockContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 auto;
+  overflow: hidden;
 `
 
 const TimeBlock = styled.div`
   width: 100%;
   text-align: center;
+  position: relative;
+
+  &:before {
+    content: ':';
+    font-size: 60px;
+    font-family: Arial;
+    position: absolute;
+    right: -12px;
+  }
 `
 
 const Time = styled.div`

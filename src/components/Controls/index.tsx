@@ -14,11 +14,21 @@ const ControlsContainer = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
+  overflow: hidden;
 `
 
 const InputBlock = styled.div`
   margin: 0 auto;
   text-align: center;
+  position: relative;
+
+  &:before {
+    content: ':';
+    font-size: 60px;
+    font-family: Arial;
+    position: absolute;
+    right: -35px;
+  }
 `
 
 const Input = styled.input`
@@ -53,6 +63,11 @@ const ControlButton = styled.button`
   font-size: 26px;
   text-transform: uppercase;
   cursor: pointer;
+  background: ${(props) => props.color ? props.color : '#111'};
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  border-radius: ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px;
 `
 
 const Controls: FunctionComponent<Props> = ({
@@ -111,7 +126,7 @@ const Controls: FunctionComponent<Props> = ({
         </ControlButton>
       )}
       {!!intervalId && (
-        <ControlButton onClick={handleStopButtonOnClick}>
+        <ControlButton color={'#da1616'} onClick={handleStopButtonOnClick}>
           Stop
         </ControlButton>
       )}
