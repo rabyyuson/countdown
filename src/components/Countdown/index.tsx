@@ -189,6 +189,7 @@ class Countdown extends React.Component<{}, Props> {
       const timeDifference = selectedTime.getTime() - now.getTime()
       if (timeDifference < 1000) {
         this.resetCountdown()
+        return
       }
 
       const calculatedHours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24)

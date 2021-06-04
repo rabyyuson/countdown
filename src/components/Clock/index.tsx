@@ -49,6 +49,7 @@ const Time = styled.div`
 
   @media (max-width: 560px) {
     margin-bottom: 4px;
+    margin-left: -10px;
   }
 `
 
