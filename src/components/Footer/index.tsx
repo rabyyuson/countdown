@@ -1,3 +1,4 @@
+import { FunctionComponent } from 'react'
 import styled from 'styled-components'
 
 const FooterContainer = styled.div`
@@ -17,7 +18,7 @@ const Link = styled.a`
   }
 `
 
-const Footer = () => {
+const Footer: FunctionComponent = () => {
   const now = new Date()
   
   return (
