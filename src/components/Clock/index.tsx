@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 const ClockContainer = styled.div`
   width: 500px;
-  background-color: ${(props) => props.theme.global.body_color || "#fff"};
-  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  background-color: ${(props) => props.theme.global.body_color || "#ececec"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#ddd"};
   border-bottom: none;
   border-top: none;
   display: flex;

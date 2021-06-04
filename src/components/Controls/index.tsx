@@ -5,8 +5,8 @@ import styled from 'styled-components'
 const ControlsContainer = styled.div`
   width: 500px;
   border-radius: 0 0 ${(props) => props.theme.global.border_radius * 2 || 0}px ${(props) => props.theme.global.border_radius * 2 || 0}px;
-  background-color: ${(props) => props.theme.global.body_color || "#fff"};
-  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  background-color: ${(props) => props.theme.global.body_color || "#ececec"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#ddd"};
   border-top: none;
   margin: 0 auto;
 `

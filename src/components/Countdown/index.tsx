@@ -18,8 +18,8 @@ const LogoContainer = styled.div`
   width: 460px;
   margin: 0 auto;
   border-radius: ${(props) => props.theme.global.border_radius * 2 || 0}px ${(props) => props.theme.global.border_radius * 2 || 0}px 0 0;
-  background-color: ${(props) => props.theme.global.body_color || "#fff"};
-  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#fff"};
+  background-color: ${(props) => props.theme.global.body_color || "#ececec"};
+  border: 2px solid ${(props) => props.theme.global.primary_border_color || "#ddd"};
   border-bottom: none;
 `
 
