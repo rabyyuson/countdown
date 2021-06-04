@@ -2,10 +2,11 @@ import React, { ChangeEvent, MouseEvent } from 'react'
 import { ThemeProvider } from 'styled-components'
 import fetch from 'cross-fetch'
 import get from 'lodash/get'
-import { Props } from './interfaces'
+import { Props } from './interface'
 import Clock from '../Clock'
 import Controls from '../Controls'
 import config from '../../config.json'
+import styled from 'styled-components'
 
 class Countdown extends React.Component<{}, Props> {
   hoursInput: HTMLInputElement | null;
@@ -33,7 +34,7 @@ class Countdown extends React.Component<{}, Props> {
 
     this.state = {
       theme: {
-        "forms": {
+        forms: {
           "font_size": null,
           "font_color": null,
           "font_family": null,
@@ -43,7 +44,7 @@ class Countdown extends React.Component<{}, Props> {
           "background_color": null,
           "placeholder_color": null,
         },
-        "global": {
+        global: {
           "body_color": null,
           "error_color": null,
           "border_radius": 0,
@@ -51,13 +52,24 @@ class Countdown extends React.Component<{}, Props> {
           "primary_border_color": null,
           "secondary_body_color": null,
         },
-        "primaryFontFamily": {
-          "bold": null,
-          "light": null,
-          "medium": null,
-          "regular": null,
+        header: {
+          "logo": undefined,
+          "cart_icon": null,
+          "font_size": 0,
+          "font_color": null,
+          "font_family": null,
+          "account_icon": null,
+          "border_color": null,
+          "border_radius": 0,
+          "background_color": null,
+          "background_image": null,
+          "active_font_color": null,
+          "mobile_logo_width": 0,
+          "desktop_logo_width": 0,
+          "active_border_color": null,
+          "active_background_color": null,
         },
-        "text": {
+        text: {
           "primary_text_size": 0,
           "primary_text_color": null,
           "secondary_text_size": 0,
@@ -89,14 +101,14 @@ class Countdown extends React.Component<{}, Props> {
         const data = get(visualConfigurations, 'data.data')
         const forms = get(data, 'forms') || {}
         const global = get(data, 'global') || {}
-        const primaryFontFamily = get(data, 'primary_font_family') || {}
+        const header = get(data, 'header') || {}
         const text = get(data, 'text') || {}
-        
+
         this.setState({
           theme: {
             forms,
             global,
-            primaryFontFamily,
+            header,
             text,
           }
         })
@@ -205,6 +217,7 @@ class Countdown extends React.Component<{}, Props> {
 
   resetCountdown() {
     window.clearInterval(this.state.intervalId)
+    
     this.setState({
       time: {
         hours: 0,
@@ -229,21 +242,30 @@ class Countdown extends React.Component<{}, Props> {
 
   render() {
     const { intervalId, theme, time } = this.state
-    
+
+    const Logo = styled.img.attrs((props) => ({
+      src: props.theme.header && props.theme.header.logo
+    }))`
+      width: 100%;
+    `
+
+    console.log(theme)
+
     return (
       <ThemeProvider theme={theme}>
-        <Clock time={time} />
-        <Controls
-          intervalId={intervalId}
-          handleHoursInputOnChange={this.handleHoursInputOnChange}
-          handleMinutesInputOnChange={this.handleMinutesInputOnChange}
-          handleSecondsInputOnChange={this.handleSecondsInputOnChange}
-          handleStartButtonOnClick={this.handleStartButtonOnClick}
-          handleStopButtonOnClick={this.handleStopButtonOnClick}
-          setHoursInputRef={this.setHoursInputRef}
-          setMinutesInputRef={this.setMinutesInputRef}
-          setSecondsInputRef={this.setSecondsInputRef}
-        />
+          <Logo />
+          <Clock time={time} />
+          <Controls
+            intervalId={intervalId}
+            handleHoursInputOnChange={this.handleHoursInputOnChange}
+            handleMinutesInputOnChange={this.handleMinutesInputOnChange}
+            handleSecondsInputOnChange={this.handleSecondsInputOnChange}
+            handleStartButtonOnClick={this.handleStartButtonOnClick}
+            handleStopButtonOnClick={this.handleStopButtonOnClick}
+            setHoursInputRef={this.setHoursInputRef}
+            setMinutesInputRef={this.setMinutesInputRef}
+            setSecondsInputRef={this.setSecondsInputRef}
+          />
       </ThemeProvider>
     )
   }

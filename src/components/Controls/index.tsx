@@ -1,6 +1,7 @@
-import { ChangeEvent, MouseEvent } from 'react'
+import { FunctionComponent } from 'react'
+import { Props } from './interface'
 
-const Controls = ({
+const Controls: FunctionComponent<Props> = ({
   intervalId,
   handleHoursInputOnChange,
   handleMinutesInputOnChange,
@@ -9,17 +10,7 @@ const Controls = ({
   handleStopButtonOnClick,
   setHoursInputRef,
   setMinutesInputRef,
-  setSecondsInputRef,
-}: {
-  intervalId: number;
-  handleHoursInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleMinutesInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleSecondsInputOnChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleStartButtonOnClick: (event: MouseEvent<HTMLButtonElement>) => void;
-  handleStopButtonOnClick: (event: MouseEvent<HTMLButtonElement>) => void;
-  setHoursInputRef: (element: HTMLInputElement | null) => void;
-  setMinutesInputRef: (element: HTMLInputElement | null) => void;
-  setSecondsInputRef: (element: HTMLInputElement | null) => void;
+  setSecondsInputRef
 }) => (
   <>
     <div>

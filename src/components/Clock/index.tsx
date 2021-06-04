@@ -1,13 +1,9 @@
-import React, { FunctionComponent } from 'react'
-import { Props } from './interfaces'
+import { FunctionComponent } from 'react'
+import { Props } from './interface'
 
 const Clock: FunctionComponent<Props> = ({ time }) => {
-  const {
-    hours,
-    minutes,
-    seconds,
-  } = time
-  
+  const { hours, minutes, seconds } = time
+
   return (
     <>
       <div>
