@@ -244,8 +244,6 @@ class Countdown extends React.Component<{}, Props> {
   render() {
     const { intervalId, theme, time } = this.state
 
-    console.log(theme)
-
     return (
       <ThemeProvider theme={theme}>
         <LogoWrapper>
