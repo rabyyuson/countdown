@@ -4,20 +4,20 @@
 
 A countdown timer React web application.
 
-### Installation
+### Requires:
 
-1. Install [`Yarn`](https://yarnpkg.com/en/) and [`TypeScript`](https://www.typescriptlang.org)
+- [node](https://nodejs.org/en/download/)
+- [Yarn](https://github.com/yarnpkg/yarn.) or [npm](https://github.com/npm/cli/)
 
-2. Install the project dependencies:
+### Installation:
 
-    ```bash
-    yarn install
-    ```
+```
+git clone https://github.com/rabyyuson/countdown.git
+cd countdown
+```
 
-3. Start the development server:
+### Running:
 
-    ```bash
-    yarn start
-    ```
+### `yarn start` or `npm start`
 
-4. Once it's done compiling, view the site at: [`http://localhost:3000/`](http://localhost:3000/).
+This runs the app and can be visited at [http://localhost:3000](http://localhost:3000) on your browser.
