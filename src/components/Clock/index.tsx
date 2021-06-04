@@ -12,6 +12,13 @@ const ClockContainer = styled.div`
   flex-direction: row;
   margin: 0 auto;
   overflow: hidden;
+
+  @media (max-width: 560px) {
+    border: 1px dashed red;
+    width: 100%;
+    border: none;
+    display: block;
+  }
 `
 
 const TimeBlock = styled.div`
@@ -26,6 +33,12 @@ const TimeBlock = styled.div`
     position: absolute;
     right: -12px;
   }
+
+  @media (max-width: 560px) {
+    &:before {
+      display: none;
+    }
+  }
 `
 
 const Time = styled.div`
@@ -33,6 +46,10 @@ const Time = styled.div`
   font-weight: bold;
   font-family: Arial;
   margin-bottom: 8px;
+
+  @media (max-width: 560px) {
+    margin-bottom: 4px;
+  }
 `
 
 const TimeLabel = styled.label`

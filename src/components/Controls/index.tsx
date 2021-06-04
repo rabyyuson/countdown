@@ -9,12 +9,24 @@ const ControlsContainer = styled.div`
   border: 2px solid ${(props) => props.theme.global.primary_border_color || "#ddd"};
   border-top: none;
   margin: 0 auto;
+
+  @media (max-width: 560px) {
+    width: 100%;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+  }
 `
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   overflow: hidden;
+
+  @media (max-width: 560px) {
+    display: block;
+    padding: 0 20px;
+  }
 `
 
 const InputBlock = styled.div`
@@ -28,6 +40,12 @@ const InputBlock = styled.div`
     font-family: Arial;
     position: absolute;
     right: -35px;
+  }
+
+  @media (max-width: 560px) {
+    &:before {
+      display: none;
+    }
   }
 `
 
@@ -45,6 +63,11 @@ const Input = styled.input`
   margin-left: 15px;
   margin-top: -1px;
   margin-bottom: 5px;
+
+  @media (max-width: 560px) {
+    width: 100%;
+    margin: 0;
+  }
 `
 
 const InputLabel = styled.label`
@@ -68,6 +91,11 @@ const ControlButton = styled.button`
   border: none;
   font-weight: bold;
   border-radius: ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px ${(props) => props.theme.global.border_radius || 0}px;
+
+  @media (max-width: 560px) {
+    border-radius: 0;
+    border: none;
+  }
 `
 
 const Controls: FunctionComponent<Props> = ({

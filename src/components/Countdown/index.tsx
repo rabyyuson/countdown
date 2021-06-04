@@ -11,6 +11,10 @@ import styled from 'styled-components'
 
 const LogoWrapper = styled.div`
   margin: 40px 0 0 0;
+
+  @media (max-width: 560px) {
+    margin: 0;
+  }
 `
 
 const LogoContainer = styled.div`
@@ -21,6 +25,13 @@ const LogoContainer = styled.div`
   background-color: ${(props) => props.theme.global.body_color || "#ececec"};
   border: 2px solid ${(props) => props.theme.global.primary_border_color || "#ddd"};
   border-bottom: none;
+
+  @media (max-width: 560px) {
+    width: 100%;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+  }
 `
 
 const Logo = styled.img.attrs((props) => ({
