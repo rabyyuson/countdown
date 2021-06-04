@@ -42,6 +42,7 @@ const TimeBlock = styled.div`
 `
 
 const Time = styled.div`
+  width: 100%;
   font-size: 60px;
   font-weight: bold;
   font-family: Arial;

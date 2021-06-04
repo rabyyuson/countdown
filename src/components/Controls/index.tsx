@@ -19,30 +19,35 @@ const ControlsContainer = styled.div`
 `
 
 const InputContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   overflow: hidden;
 
   @media (max-width: 560px) {
     display: block;
-    padding: 0 20px;
+    margin: 0;
+    padding: 0;
   }
 `
 
 const InputBlock = styled.div`
-  margin: 0 auto;
+  width: 100%;
   text-align: center;
   position: relative;
+  padding: 0 25px;
 
   &:before {
     content: ':';
     font-size: 60px;
     font-family: Arial;
     position: absolute;
-    right: -35px;
+    right: -15px;
   }
 
   @media (max-width: 560px) {
+    padding: 0;
+
     &:before {
       display: none;
     }
@@ -50,6 +55,7 @@ const InputBlock = styled.div`
 `
 
 const Input = styled.input`
+  width: 100%;
   font-size: 60px;
   font-weight: bold;
   color: #000;
@@ -60,7 +66,6 @@ const Input = styled.input`
   border-bottom: 2px solid #111;
   display: block;
   font-family: Arial;
-  margin-left: 15px;
   margin-top: -1px;
   margin-bottom: 5px;
 
