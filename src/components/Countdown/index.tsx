@@ -8,6 +8,18 @@ import Controls from '../Controls'
 import config from '../../config.json'
 import styled from 'styled-components'
 
+const LogoContainer = styled.div`
+  width: 400px;
+  margin: 0 auto;
+  border: 1px dashed red;
+`
+
+const Logo = styled.img.attrs((props) => ({
+  src: props.theme.header && props.theme.header.logo
+}))`
+  width: 100%;
+`
+
 class Countdown extends React.Component<{}, Props> {
   hoursInput: HTMLInputElement | null;
   minutesInput: HTMLInputElement | null;
@@ -242,18 +254,6 @@ class Countdown extends React.Component<{}, Props> {
 
   render() {
     const { intervalId, theme, time } = this.state
-
-    const LogoContainer = styled.div`
-      width: 400px;
-      margin: 0 auto;
-      border: 1px dashed red;
-    `
-
-    const Logo = styled.img.attrs((props) => ({
-      src: props.theme.header && props.theme.header.logo
-    }))`
-      width: 100%;
-    `
 
     console.log(theme)
 

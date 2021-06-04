@@ -2,16 +2,16 @@ import { FunctionComponent } from 'react'
 import { Props } from './interface'
 import styled from 'styled-components'
 
+const Container = styled.div`
+  width: 400px;
+  border: 1px dashed red;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+`
+
 const Clock: FunctionComponent<Props> = ({ time }) => {
   const { hours, minutes, seconds } = time
-
-  const Container = styled.div`
-    width: 400px;
-    border: 1px dashed red;
-    display: flex;
-    flex-direction: row;
-    margin: 0 auto;
-  `
 
   return (
     <Container>
