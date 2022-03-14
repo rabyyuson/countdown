@@ -65,24 +65,7 @@ class Countdown extends React.Component<{}, Props> {
           "primary_active_color": "#0d6cf2",
           "primary_border_color": "#e1e1e1",
           "secondary_body_color": "#fbf8f7"
-       },
-        header: {
-          "logo": undefined,
-          "cart_icon": null,
-          "font_size": 0,
-          "font_color": null,
-          "font_family": null,
-          "account_icon": null,
-          "border_color": null,
-          "border_radius": 0,
-          "background_color": null,
-          "background_image": null,
-          "active_font_color": null,
-          "mobile_logo_width": 0,
-          "desktop_logo_width": 0,
-          "active_border_color": null,
-          "active_background_color": null,
-        }
+        },
       },
       time: {
         hours: 0,
