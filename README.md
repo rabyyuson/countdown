@@ -1,6 +1,6 @@
 # Countdown
 
-[Launch application](https://countdown-rabyyuson.vercel.app/)
+[Launch application](https://countdown-raby-yuson.vercel.app/)
 
 A countdown timer React web application.
 
